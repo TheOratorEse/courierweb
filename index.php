@@ -76,8 +76,8 @@ if(isset($_POST['btn-login']))
                        
                             <div class="track-form">
                                 <label for="" class="quick-label">Package Id/Tracking Number</label>
-                                <input type="text" name="txt_uname_email" class="input-track" placeholder="Package Id">
-                                <input type="text" name="txt_password" class="input-track" placeholder="Track Number">
+                                <input type="text" name="txt_uname_email" class="input-track" placeholder="Package Id" required/>
+                                <input type="text" name="txt_password" class="input-track" placeholder="Track Number" required/>
                                 <span id="response_span"></span>
                             </div>
                             <input type="submit" name="btn-login" value="track" class="quick-button">
