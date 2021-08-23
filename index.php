@@ -1,0 +1,207 @@
+<?php
+session_start();
+require_once("class.user.php");
+$login = new USER();
+
+if($login->is_loggedin()!="")
+{
+	$login->redirect('track-page.php');
+}
+
+if(isset($_POST['btn-login']))
+{
+	$uname = strip_tags($_POST['txt_uname_email']);
+	$umail = strip_tags($_POST['txt_uname_email']);
+	$upass = strip_tags($_POST['txt_password']);
+		
+	if($login->doLogin($uname,$umail,$upass))
+	{
+		$login->redirect('track-page.php');
+	}
+	else
+	{
+		$error = "Wrong Details !";
+	}	
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FREIGHT EXPRESS</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&amp;display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="style.css" type="text/css"  />
+    <script type="text/javascript" src="jquery-1.11.3-jquery.min.js"></script>
+    <!--<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="brand">
+            <a href="index-2.html"><img src="img/logo.png" alt="FREIGHT EXPRESS" class="logo-img"></a>
+                <div class="brand-hamburger">
+                    <aside class="hamburger"></aside>
+                    <aside class="hamburger"></aside>
+                    <aside class="hamburger"></aside>
+                </div>
+               
+            </div>
+                    <div class="nav-link">
+                             <a href="index-2.html" class="nav-item">Home</a>
+                            <a href="about.html" class="nav-item">About</a>
+                            <a href="service.html" class="nav-item">Service</a>
+                            <a href="support.html" class="nav-item">Support</a>
+                            <a href="faq.html" class="nav-item">Frequently asked questions</a>
+                    </div>
+        </nav>
+            <div class="big-wrapper">
+                    <h1 class="welcome">FREIGHT EXPRESS </h1>
+                    
+                    <div class="big-nav">
+                        <a href="terms.html" class="big-nav-item"><img src="img/rate.png" class="big-nav-img"></a>
+                        <a href="showpage.html" class="big-nav-item"><img src="img/track.png" class="big-nav-img"></a>
+                        <a href="location.html" class="big-nav-item"><img src="img/locations.png" class="big-nav-img"></a>
+                    </div>
+                    <div class="quick-track-wrapper" style="position:relative;">
+                        <form class="quick-track" id="tracking-form" method="POST">
+
+                       
+                            <div class="track-form">
+                                <label for="" class="quick-label">Package Id/Tracking Number</label>
+                                <input type="text" name="txt_uname_email" class="input-track" placeholder="Package Id">
+                                <input type="text" name="txt_password" class="input-track" placeholder="Track Number">
+                                <span id="response_span"></span>
+                            </div>
+                            <input type="submit" name="btn-login" value="track" class="quick-button">
+                        </form>
+                         
+                        <a href="support.html#contact_form" class="inscription" style="text-decoration:none;">Multiple tracking numbers | Need help?
+                        </div>
+                        <div id="error">
+        <?php
+			if(isset($error))
+			{
+				?>
+                <div class="alert alert-danger">
+                   <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?> !
+                </div>
+                <?php
+			}
+		?>
+        </div>
+                        <aside class="loader" >
+                            <img src="img/loading.gif" alt="">
+                        </aside>
+                        
+                    </div>
+            </div>
+    </header>
+
+    <main>
+        <div class="delivery-container">
+            <div class="account" >
+                <div class="a-left">
+                    <h2 class="account-subt">
+                    Provide opportunities 
+                    </h2>
+                    <h4 class="account-text">
+                    We are a courier carrier and it provides the entire range of chartered airborne services from documentation to cargo. Our service is relentlessly monitored to achieve a net service level of 99.96%.                    </h4>
+                    <a href="about.html" >
+                        <button class="a-right--btn" style="cursor:pointer;">
+                        read more
+                        </button>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        <section class="container">
+            <h3 class="main-heading">More than shipping</h3>
+            <p class="landing-writeup">
+            Explore how to become more efficient, see printed offers and solutions, or gain insight and inspiration for your small business.
+            </p>
+            <div class="show-wrapper">
+                <div class="show-container">
+                    <img src="img/laptop.png" alt="business" srcset="">
+                    <h4 class="show-writeup-heading">Design efficiency</h4>
+                    <p class="show-writeup">
+                    Designed to improve the reliability of our operations and process efficiency, and to increase value to customers by saving time and costs.                 
+                  </p>
+                </div>
+                <div class="show-container">
+                    <img src="img/service.png" alt="office" srcset="">
+                    <h4 class="show-writeup-heading">Special transportation</h4>
+                    <p class="show-writeup">
+                        
+                    Today it is still in the country, that is, focusing on packaging and transportation as the main business, not as a by-product of a passenger airline is not the only one. The dedicated aviation system to support our services is self-sufficient, with its own bonded warehouse, ground service and maintenance capabilities.    
+                    </p>
+                </div>
+                <div class="show-container">
+                    <img src="img/customer.png" alt="customers" srcset="">
+                    <h4 class="show-writeup-heading">customer relations</h4>
+                    <p class="show-writeup">
+                    We have a dedicated team who provides expertise in customs of all countries within the country, as well as regulatory licensing experts to support seamless services to customers.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="footer-link">
+                    <a href="about.html">About</a>
+                    <a href="service.html">Services</a>
+                    <a href="support.html">Support</a>
+                </div>
+                <div class="footer-link">
+                    <a href="faq.html">FAQ</a>
+                    <a href="terms.html">Terms of service</a>
+                    <a href="fraud_prevention.html">Fraud protection</a>
+                </div>
+                
+            </div>
+            <div class="footer-right" style="color:#fff;">
+                    <address style="color:#fff;">
+                    1199 Rainbow Road, <br/>
+                         Los Angeles,<br/>
+                         California, U.S.
+                        90017.   <br/>    <br/>
+                        +1 217-564-6191<br/>
+                <aside style="font-size:0.9rem; align-text:center;padding:5px 0;">
+                support@freightxpress.xyz
+                </aside>
+                <aside style="color:#fff; padding:10px 0;">
+                 
+                </aside>
+                     </address>
+                 </div>
+             </div>
+         </footer> 
+             
+  
+    <aside class="copy">
+            &copy;freightxpress.xyz
+    </aside>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/main.js"> </script>
+    
+    <script>
+    function googleTranslateElementInit()
+                {
+                // new google.translate.TranslateElement({pageLanguage: window.navigator.language}, 'google_translate_element');
+                }
+        </script>
+        
+</body>
+
+</html>
